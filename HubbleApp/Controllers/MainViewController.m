@@ -16,7 +16,7 @@
 
 @implementation MainViewController
 
-@synthesize imageUrls, currentImage, imageView;
+@synthesize imageUrls, currentImage, imageView, changeImageButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -43,12 +43,14 @@
 }
 
 - (IBAction)changeImage:(id)sender {
+    [changeImageButton setBackgroundColor:[UIColor grayColor]];
     int newImageIndex = arc4random() % imageUrls.count;
     NSString *imageUrl = [imageUrls objectAtIndex:newImageIndex];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         currentImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]]];
         dispatch_async(dispatch_get_main_queue(), ^{
             [imageView setImage:currentImage];
+            [changeImageButton setBackgroundColor:nil];
         });
     });
 }

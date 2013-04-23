@@ -10,4 +10,5 @@
 
 @interface MainViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) IBOutlet UIButton *changeImageButton;
 @end
