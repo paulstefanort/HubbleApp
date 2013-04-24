@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MainViewController : UIViewController
-@property (strong, nonatomic) IBOutlet UIImageView *imageView;
-@property (strong, nonatomic) IBOutlet UIButton *changeImageButton;
+@interface MainViewController : UIViewController <UIScrollViewDelegate>
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @end

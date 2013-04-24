@@ -9,14 +9,16 @@
 #import "MainViewController.h"
 #include <stdlib.h>
 
-@interface MainViewController ()
-@property NSArray *imageUrls;
-@property UIImage *currentImage;
+@interface MainViewController () {
+    NSArray *imageUrls;
+    NSMutableDictionary *images;
+    UIImage *currentImage;
+}
 @end
 
 @implementation MainViewController
 
-@synthesize imageUrls, currentImage, imageView, changeImageButton;
+@synthesize scrollView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,6 +35,7 @@
             @"http://imgsrc.hubblesite.org/hu/db/images/hs-2012-30-a-web.jpg",
             @"http://imgsrc.hubblesite.org/hu/db/images/hs-2012-29-a-web.jpg"
         ];
+        images = [NSMutableDictionary new];
     }
     return self;
 }
@@ -40,19 +43,31 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-}
-
-- (IBAction)changeImage:(id)sender {
-    [changeImageButton setBackgroundColor:[UIColor grayColor]];
-    int newImageIndex = arc4random() % imageUrls.count;
-    NSString *imageUrl = [imageUrls objectAtIndex:newImageIndex];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        currentImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]]];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [imageView setImage:currentImage];
-            [changeImageButton setBackgroundColor:nil];
+    
+    for (int i = 0; i < imageUrls.count; i++) {
+        NSString *imageUrl = [imageUrls objectAtIndex:i];
+        __block UIImage *image;
+        __block NSMutableDictionary *imageDictionary = images;
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]]];
+            [imageDictionary setObject:image forKey:[NSNumber numberWithInt:i]];
+            if (i == 0) {
+                currentImage = image;
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+                [imageView setContentMode:UIViewContentModeScaleAspectFill];
+                [imageView setClipsToBounds:true];
+                CGRect imageViewFrame = CGRectMake(240 * i, 0, 240, 444);
+                [imageView setFrame:imageViewFrame];
+                [scrollView addSubview:imageView];
+            });
         });
-    });
+    }
+    [scrollView setContentSize:CGSizeMake(imageUrls.count * 240, 0)];
+    [scrollView setPagingEnabled:true];
+    [scrollView setClipsToBounds:false];
+    [scrollView setShowsHorizontalScrollIndicator:false];
 }
 
 - (IBAction)printImage:(id)sender {
@@ -67,6 +82,11 @@
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Print Image" message:@"Please load an image first." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alertView show];
     }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    int currentImageIndex = scrollView.contentOffset.x / 240;
+    currentImage = [images objectForKey:[NSNumber numberWithInt:currentImageIndex]];
 }
 
 @end
