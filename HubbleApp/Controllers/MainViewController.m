@@ -7,6 +7,7 @@
 //
 
 #import "MainViewController.h"
+#import "PhotoView.h"
 #include <stdlib.h>
 
 @interface MainViewController () {
@@ -55,12 +56,28 @@
                 currentImage = image;
             }
             dispatch_async(dispatch_get_main_queue(), ^{
+                PhotoView *photoView = [[PhotoView alloc] initWithFrame:CGRectMake(240 * i, 0, 240, 444)];
+                photoView.imageView.image = image;
+                photoView.imageLabel.text = imageUrl;
+                photoView.clipsToBounds = true;
+                
+                /*
                 UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
                 [imageView setContentMode:UIViewContentModeScaleAspectFill];
                 [imageView setClipsToBounds:true];
                 CGRect imageViewFrame = CGRectMake(240 * i, 0, 240, 444);
                 [imageView setFrame:imageViewFrame];
-                [scrollView addSubview:imageView];
+                 */
+                
+                [scrollView addSubview:photoView];
+                
+                [self.view addConstraint:[NSLayoutConstraint constraintWithItem:photoView
+                                                                       attribute:NSLayoutAttributeHeight
+                                                                       relatedBy:NSLayoutRelationEqual
+                                                                          toItem:scrollView
+                                                                       attribute:NSLayoutAttributeHeight
+                                                                      multiplier:1
+                                                                        constant:0]];
             });
         });
     }

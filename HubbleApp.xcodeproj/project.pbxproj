@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D4530716172F5B6900B8495C /* PhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4530715172F5B6900B8495C /* PhotoView.m */; };
+		D4530718172F5BE100B8495C /* PhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4530717172F5BE100B8495C /* PhotoView.xib */; };
 		D459D1731717C43000F870A5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D459D1721717C43000F870A5 /* UIKit.framework */; };
 		D459D1751717C43000F870A5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D459D1741717C43000F870A5 /* Foundation.framework */; };
 		D459D1771717C43000F870A5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D459D1761717C43000F870A5 /* CoreGraphics.framework */; };
@@ -21,6 +23,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D4530714172F5B6900B8495C /* PhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoView.h; path = Views/PhotoView.h; sourceTree = "<group>"; };
+		D4530715172F5B6900B8495C /* PhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoView.m; path = Views/PhotoView.m; sourceTree = "<group>"; };
+		D4530717172F5BE100B8495C /* PhotoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PhotoView.xib; path = Views/PhotoView.xib; sourceTree = "<group>"; };
 		D459D16F1717C43000F870A5 /* HubbleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HubbleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D459D1721717C43000F870A5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D459D1741717C43000F870A5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -110,6 +115,9 @@
 			isa = PBXGroup;
 			children = (
 				D4D5FF371717C52D00A5C689 /* MainView.xib */,
+				D4530714172F5B6900B8495C /* PhotoView.h */,
+				D4530715172F5B6900B8495C /* PhotoView.m */,
+				D4530717172F5BE100B8495C /* PhotoView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -179,6 +187,7 @@
 				D459D1871717C43000F870A5 /* Default@2x.png in Resources */,
 				D459D1891717C43000F870A5 /* Default-568h@2x.png in Resources */,
 				D4D5FF381717C52D00A5C689 /* MainView.xib in Resources */,
+				D4530718172F5BE100B8495C /* PhotoView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,6 +201,7 @@
 				D459D17F1717C43000F870A5 /* main.m in Sources */,
 				D459D1831717C43000F870A5 /* AppDelegate.m in Sources */,
 				D4D5FF361717C52000A5C689 /* MainViewController.m in Sources */,
+				D4530716172F5B6900B8495C /* PhotoView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
